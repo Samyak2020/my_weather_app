@@ -1,3 +1,4 @@
+Weathery, A weather App
 # myweatherapp
 
 A new Flutter application. Learning more about the UI designing and trying to learn how to use and implement API. 
