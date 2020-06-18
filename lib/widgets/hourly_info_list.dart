@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:myweatherapp/models/hourly_list_items.dart';
+import 'package:myweatherapp/utilities/constants.dart';
 
 class HourlyInfoList extends StatefulWidget {
   @override
@@ -14,64 +16,47 @@ class _HourlyInfoListState extends State<HourlyInfoList> {
   Widget getHourlyListView() {
     var listView = ListView.builder(
       scrollDirection: Axis.horizontal,
-      itemCount: 24,
+      itemCount: items.length,
       itemBuilder: (context, index) {
-        return getListItems();
+        return Container(
+          margin: EdgeInsets.fromLTRB(14.0, 15.0, 0.0, 14.0),
+          width: MediaQuery.of(context).size.width * 0.16,
+          height: MediaQuery.of(context).size.height * 0.25,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(50.0),
+            color: Color(0xff434761),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              Text(
+                items[index].hourText,
+                style: TextStyle(
+                  fontSize: MediaQuery.of(context).size.width * 0.1 * 0.45,
+                  color: Colors.white70,
+                  fontFamily: 'SourceSansPro',
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              Icon(
+                items[index].icons,
+                color: Color(0xffEDE6CB),
+                size: MediaQuery.of(context).size.height * 0.1 * 0.5,
+              ),
+              Text(
+                items[index].tempText,
+                style: TextStyle(
+                  fontSize: MediaQuery.of(context).size.width * 0.1 * 0.45,
+                  color: Colors.white70,
+                  fontFamily: 'SourceSansPro',
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ],
+          ),
+        );
       },
     );
     return listView;
-  }
-
-  Widget getListItems() {
-    var columnItems = Container(
-      margin: EdgeInsets.fromLTRB(15.0, 15.0, 0.0, 15.0),
-      width: 56.0,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(50.0),
-        color: Color(0xff434761),
-      ),
-      child: ListItem(icons: Icons.wb_sunny, hourText: '6 AM', tempText: '18`'),
-    );
-    return columnItems;
-  }
-}
-
-class ListItem extends StatelessWidget {
-  ListItem({this.hourText, this.icons, this.tempText});
-
-  final String hourText;
-  final IconData icons;
-  final String tempText;
-
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: <Widget>[
-        Text(
-          hourText,
-          style: TextStyle(
-            fontSize: 15.0,
-            color: Colors.white70,
-            fontFamily: 'SourceSansPro',
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        Icon(
-          icons,
-          color: Colors.white70,
-        ),
-        Text(
-          tempText,
-          style: TextStyle(
-            fontSize: 17.0,
-            color: Colors.white70,
-            fontFamily: 'SourceSansPro',
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-      ],
-    );
   }
 }

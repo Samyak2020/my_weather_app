@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:myweatherapp/screens/this_week.dart';
 import 'package:myweatherapp/utilities/constants.dart';
 import 'package:myweatherapp/widgets/hourly_info_list.dart';
 import 'package:myweatherapp/widgets/misc_info.dart';
@@ -20,9 +22,9 @@ class _TomorrowScreenState extends State<TomorrowScreen> {
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back_ios,
-            color: kTextColor,
+            color: kIconColor,
           ),
-          iconSize: 35.0,
+          iconSize: MediaQuery.of(context).size.width * 0.08,
           onPressed: () {
             Navigator.pop(context);
           },
@@ -30,7 +32,7 @@ class _TomorrowScreenState extends State<TomorrowScreen> {
         title: Text(
           'Weathery',
           style: TextStyle(
-            fontSize: 30.0,
+            fontSize: MediaQuery.of(context).size.width * 0.07,
             color: kTextColor,
             fontFamily: 'PlayfairDisplay',
             fontWeight: FontWeight.w600,
@@ -40,9 +42,9 @@ class _TomorrowScreenState extends State<TomorrowScreen> {
           IconButton(
             icon: Icon(
               Icons.search,
-              color: kTextColor,
+              color: kIconColor,
             ),
-            iconSize: 35.0,
+            iconSize: MediaQuery.of(context).size.width * 0.08,
             onPressed: () {},
           ),
         ],
@@ -50,69 +52,62 @@ class _TomorrowScreenState extends State<TomorrowScreen> {
       body: Column(
         children: <Widget>[
           Expanded(
-            flex: 9,
-            child: Padding(
-              padding: EdgeInsets.only(left: 25.0, top: 10.0),
-              child: Container(
-                alignment: Alignment.bottomLeft,
-                //color: Colors.red,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      'Kathmandu',
-                      style: TextStyle(
-                        // backgroundColor: Colors.black,
-                        color: kTextColor,
-                        fontSize: 36.0,
-                        fontFamily: 'SourceSansPro',
-                        fontWeight: FontWeight.w700,
+            flex: 6,
+            child: Container(
+              padding: EdgeInsets.only(left: 25.0, top: 10.0, bottom: 10.0),
+              alignment: Alignment.bottomLeft,
+              //color: Colors.red,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Expanded(
+                    flex: 5,
+                    child: FittedBox(
+                      child: Text(
+                        'Kathmandu',
+                        style: TextStyle(
+                          // backgroundColor: Colors.black,
+                          color: kTextColor,
+                          fontFamily: 'SourceSansPro',
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
                     ),
-                    Text(
-                      'Nepal',
-                      style: TextStyle(
-                        //backgroundColor: Colors.pink,
-                        color: kTextColor,
-                        fontSize: 32.0,
-                        fontFamily: 'SourceSansPro',
-                        fontWeight: FontWeight.w700,
+                  ),
+                  Expanded(
+                    flex: 4,
+                    child: FittedBox(
+                      child: Text(
+                        'Nepal',
+                        style: TextStyle(
+                          //backgroundColor: Colors.pink,
+                          color: kTextColor,
+                          fontFamily: 'SourceSansPro',
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
                     ),
-                    Row(
-                      children: <Widget>[
-                        Text(
-                          'Thursday, 5/27',
-                          style: TextStyle(
-                            //backgroundColor: Colors.indigo,
-                            color: kTextColor,
-                            fontSize: 15.0,
-                            fontFamily: 'SourceSansPro',
-                            fontWeight: FontWeight.w100,
-                          ),
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: FittedBox(
+                      child: Text(
+                        'Thursday, 5/27',
+                        style: TextStyle(
+                          //backgroundColor: Colors.indigo,
+                          color: kTextColor,
+                          fontFamily: 'SourceSansPro',
+                          fontWeight: FontWeight.w100,
                         ),
-                        SizedBox(
-                          width: 8.0,
-                        ),
-                        Text(
-                          '(Tomorrow)',
-                          style: TextStyle(
-                            //backgroundColor: Colors.indigo,
-                            color: kTextColor,
-                            fontSize: 12.0,
-                            fontFamily: 'SourceSansPro',
-                            fontWeight: FontWeight.w100,
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),
           Expanded(
-            flex: 9,
+            flex: 8,
             child: WeatherInfo(),
           ),
           Expanded(
@@ -121,9 +116,10 @@ class _TomorrowScreenState extends State<TomorrowScreen> {
           ),
           // Today,Tomorrow -->
           Expanded(
-            flex: 3,
-            child: Padding(
-              padding: EdgeInsets.fromLTRB(15.0, 22.0, 75.0, 0.0),
+            flex: 2,
+            child: Container(
+              margin: EdgeInsets.only(top: 10.0),
+              padding: EdgeInsets.fromLTRB(15.0, 0.0, 75.0, 0.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
@@ -133,7 +129,7 @@ class _TomorrowScreenState extends State<TomorrowScreen> {
                       style: TextStyle(
                         // backgroundColor: Colors.black,
                         color: Colors.white70,
-                        fontSize: 15.0,
+                        fontSize: MediaQuery.of(context).size.width * 0.1 * 0.4,
                         fontFamily: 'SourceSansPro',
                         fontWeight: FontWeight.w600,
                       ),
@@ -147,29 +143,53 @@ class _TomorrowScreenState extends State<TomorrowScreen> {
                     style: TextStyle(
                       // backgroundColor: Colors.black,
                       color: kTextColor,
-                      fontSize: 15.0,
+                      fontSize: MediaQuery.of(context).size.width * 0.1 * 0.42,
                       fontFamily: 'SourceSansPro',
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  Text(
-                    'Next 7days',
-                    style: TextStyle(
-                      // backgroundColor: Colors.black,
-                      color: Colors.white70,
-                      fontSize: 15.0,
-                      fontFamily: 'SourceSansPro',
-                      fontWeight: FontWeight.w600,
+                  GestureDetector(
+                    child: Row(
+                      children: <Widget>[
+                        Text(
+                          'Next 7days',
+                          style: TextStyle(
+                            // backgroundColor: Colors.black,
+                            color: Colors.white70,
+                            fontSize:
+                                MediaQuery.of(context).size.width * 0.1 * 0.38,
+                            fontFamily: 'SourceSansPro',
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        SizedBox(
+                          width: 2.0,
+                        ),
+                        Icon(
+                          Icons.arrow_forward,
+                          color: Colors.white70,
+                          size: MediaQuery.of(context).size.width * 0.1 * 0.38,
+                        ),
+                      ],
                     ),
+                    onTap: () {
+                      setState(() {
+                        Navigator.push(
+                          context,
+                          new MaterialPageRoute(
+                              builder: (context) => ThisWeek()),
+                        );
+                      });
+                    },
                   ),
                 ],
               ),
             ),
           ),
           Expanded(
-            flex: 10,
+            flex: 8,
             child: Padding(
-              padding: EdgeInsets.fromLTRB(40.0, 0.0, 0.0, 20.0),
+              padding: EdgeInsets.fromLTRB(40.0, 0.0, 0.0, 15.0),
               child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.horizontal(
