@@ -13,6 +13,7 @@ class TodayHomeScreen extends StatefulWidget {
 }
 
 class _TodayHomeScreenState extends State<TodayHomeScreen> {
+  bool visible = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +49,9 @@ class _TodayHomeScreenState extends State<TodayHomeScreen> {
               setState(() {
                 Navigator.push(
                   context,
-                  new MaterialPageRoute(builder: (context) => SearchScreen()),
+                  MaterialPageRoute(
+                    builder: (context) => SearchScreen(),
+                  ),
                 );
               });
             },
