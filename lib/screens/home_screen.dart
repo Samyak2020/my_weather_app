@@ -2,10 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:myweatherapp/screens/search_screen.dart';
 import 'package:myweatherapp/screens/this_week.dart';
 import 'package:myweatherapp/screens/tomorrow_screen.dart';
+import 'package:myweatherapp/services/location.dart';
+import 'package:myweatherapp/services/networking.dart';
 import 'package:myweatherapp/utilities/constants.dart';
 import 'package:myweatherapp/widgets/hourly_info_list.dart';
 import 'package:myweatherapp/widgets/misc_info.dart';
 import 'package:myweatherapp/widgets/weather_info.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:myweatherapp/services/location.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class TodayHomeScreen extends StatefulWidget {
   @override
@@ -13,7 +19,29 @@ class TodayHomeScreen extends StatefulWidget {
 }
 
 class _TodayHomeScreenState extends State<TodayHomeScreen> {
-  bool visible = true;
+  var latitude;
+  var longitude;
+
+  void getLocationData() async {
+    LocationTask locationTask = LocationTask();
+
+    await locationTask.getCurrentLocation();
+    this.latitude = locationTask.latitude;
+    this.longitude = locationTask.longitude;
+
+    NetworkHelper networkHelper = NetworkHelper(
+        'https://api.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=$apiKey');
+
+    var weatherData = await networkHelper.getData();
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getLocationData();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,13 +54,15 @@ class _TodayHomeScreenState extends State<TodayHomeScreen> {
             Icons.refresh,
             color: kIconColor,
           ),
-          iconSize: MediaQuery.of(context).size.width * 0.08,
-          onPressed: () {},
+          iconSize: MediaQuery.of(context).size.width * 0.085,
+          onPressed: () {
+            print("Hello");
+          },
         ),
         title: Text(
           'Weathery',
           style: TextStyle(
-            fontSize: MediaQuery.of(context).size.width * 0.07,
+            fontSize: MediaQuery.of(context).size.width * 0.075,
             color: kTextColor,
             fontFamily: 'PlayfairDisplay',
             fontWeight: FontWeight.w600,
@@ -44,7 +74,7 @@ class _TodayHomeScreenState extends State<TodayHomeScreen> {
               Icons.search,
               color: kIconColor,
             ),
-            iconSize: MediaQuery.of(context).size.width * 0.08,
+            iconSize: MediaQuery.of(context).size.width * 0.085,
             onPressed: () {
               setState(() {
                 Navigator.push(
@@ -61,53 +91,51 @@ class _TodayHomeScreenState extends State<TodayHomeScreen> {
       body: Column(
         children: <Widget>[
           Expanded(
-            flex: 6,
+            flex: 5,
             child: Container(
-              padding: EdgeInsets.only(left: 25.0, top: 10.0, bottom: 10.0),
+              padding: EdgeInsets.only(left: 30.0, top: 5.0, bottom: 10.0),
               alignment: Alignment.bottomLeft,
               //color: Colors.red,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Expanded(
-                    flex: 5,
-                    child: FittedBox(
-                      child: Text(
-                        'Kathmandu',
-                        style: TextStyle(
-                          // backgroundColor: Colors.black,
-                          color: kTextColor,
-                          fontFamily: 'SourceSansPro',
-                          fontWeight: FontWeight.w700,
-                        ),
+                    flex: 9,
+                    child: Text(
+                      'Kathmandu',
+                      style: TextStyle(
+                        // backgroundColor: Colors.black,
+                        color: kTextColor,
+                        fontSize: MediaQuery.of(context).size.width * 0.085,
+                        fontFamily: 'SourceSansPro',
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 9,
+                    child: Text(
+                      'Nepal',
+                      style: TextStyle(
+                        //backgroundColor: Colors.pink,
+                        color: kTextColor,
+                        fontSize: MediaQuery.of(context).size.width * 0.1 * 0.8,
+                        fontFamily: 'SourceSansPro',
+                        fontWeight: FontWeight.w700,
                       ),
                     ),
                   ),
                   Expanded(
                     flex: 4,
-                    child: FittedBox(
-                      child: Text(
-                        'Nepal',
-                        style: TextStyle(
-                          //backgroundColor: Colors.pink,
-                          color: kTextColor,
-                          fontFamily: 'SourceSansPro',
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 2,
-                    child: FittedBox(
-                      child: Text(
-                        'Thursday, 5/27',
-                        style: TextStyle(
-                          //backgroundColor: Colors.indigo,
-                          color: kTextColor,
-                          fontFamily: 'SourceSansPro',
-                          fontWeight: FontWeight.w100,
-                        ),
+                    child: Text(
+                      'Thursday, 5/27',
+                      style: TextStyle(
+                        //backgroundColor: Colors.indigo,
+                        color: kTextColor,
+                        fontSize:
+                            MediaQuery.of(context).size.width * 0.1 * 0.38,
+                        fontFamily: 'SourceSansPro',
+                        fontWeight: FontWeight.w100,
                       ),
                     ),
                   ),
@@ -116,19 +144,35 @@ class _TodayHomeScreenState extends State<TodayHomeScreen> {
             ),
           ),
           Expanded(
-            flex: 8,
+            flex: 6,
             child: WeatherInfo(),
           ),
           Expanded(
-            flex: 4,
+            flex: 2,
+            child: Container(
+              padding: EdgeInsets.only(left: 15.0, right: 15.0),
+              child: Text(
+                '" asdfsetyshgduf ahaisf h;ajlsfhli ajslkfas ;fasflj ka;sn faslbfjasvfiauofb. "',
+                style: TextStyle(
+                  //backgroundColor: Colors.indigo,
+                  color: kTextColor,
+                  fontSize: MediaQuery.of(context).size.width * 0.1 * 0.42,
+                  fontFamily: 'SourceSansPro',
+                  fontWeight: FontWeight.w100,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 3,
             child: MiscInfo(),
           ),
           // Today,Tomorrow -->
           Expanded(
-            flex: 2,
+            flex: 1,
             child: Container(
-              margin: EdgeInsets.only(top: 10.0),
-              padding: EdgeInsets.fromLTRB(15.0, 0.0, 75.0, 0.0),
+              padding: EdgeInsets.fromLTRB(15.0, 0.0, 75.0, 3.0),
               //margin: EdgeInsets.only(top: 30.0),
               // color: Colors.green,
               child: Row(
@@ -206,7 +250,7 @@ class _TodayHomeScreenState extends State<TodayHomeScreen> {
             ),
           ),
           Expanded(
-            flex: 8,
+            flex: 6,
             child: Padding(
               padding: EdgeInsets.fromLTRB(40.0, 0.0, 0.0, 15.0),
               child: Container(
@@ -224,24 +268,6 @@ class _TodayHomeScreenState extends State<TodayHomeScreen> {
   }
 }
 
-//Scaffold(
-//                  appBar: AppBar(
-//                    elevation: 0.0,
-//                    leading: IconButton(
-//                      icon: Icon(
-//                        Icons.arrow_back_ios,
-//                        color: kIconColor,
-//                      ),
-//                      iconSize: MediaQuery.of(context).size.width * 0.08,
-//                      onPressed: () {
-//                        Navigator.pop(context);
-//                      },
-//                    ),
-//                  ),
-//                  body: Container(
-//                    color: Colors.red,
-//                    child: Stack(
-//                      fit: StackFit.expand,
-//                    ),
-//                  ),
-//                );
+//var temp = decodedData['main']['temp'];
+//    var condition = decodedData['weather'][0]['id'];
+//    var cityName = decodedData['name'];

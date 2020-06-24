@@ -9,8 +9,11 @@ class MiscInfo extends StatefulWidget {
 class _MiscInfoState extends State<MiscInfo> {
   @override
   Widget build(BuildContext context) {
+    var iconSize = MediaQuery.of(context).size.width * 0.08;
+    var textSize = MediaQuery.of(context).size.width * 0.044;
+
     return Container(
-      padding: EdgeInsets.only(bottom: 10.0),
+      margin: EdgeInsets.only(bottom: 15.0, top: 8.0),
       //color: Colors.red,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -19,30 +22,21 @@ class _MiscInfoState extends State<MiscInfo> {
             children: <Widget>[
               Expanded(
                 flex: 3,
-                child: FractionallySizedBox(
-                  heightFactor: 0.75,
-                  child: FittedBox(
-                    child: Icon(
-                      Icons.all_inclusive,
-                      color: kIconColor,
-                    ),
-                  ),
+                child: Icon(
+                  Icons.all_inclusive,
+                  color: kIconColor,
+                  size: iconSize,
                 ),
               ),
               Expanded(
                 flex: 2,
-                child: FractionallySizedBox(
-                  heightFactor: 0.75,
-                  child: FittedBox(
-                    child: Text(
-                      '0.8kmph',
-                      style: TextStyle(
-                        color: kTextColor,
-                        //fontSize: 18.0,
-                        fontFamily: 'SourceSansPro',
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
+                child: Text(
+                  '0.8kmph',
+                  style: TextStyle(
+                    color: kTextColor,
+                    fontSize: textSize,
+                    fontFamily: 'SourceSansPro',
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
               ),
@@ -52,30 +46,21 @@ class _MiscInfoState extends State<MiscInfo> {
             children: <Widget>[
               Expanded(
                 flex: 3,
-                child: FractionallySizedBox(
-                  heightFactor: 0.75,
-                  child: FittedBox(
-                    child: Icon(
-                      Icons.grain,
-                      color: kIconColor,
-                    ),
-                  ),
+                child: Icon(
+                  Icons.grain,
+                  color: kIconColor,
+                  size: iconSize,
                 ),
               ),
               Expanded(
                 flex: 2,
-                child: FractionallySizedBox(
-                  heightFactor: 0.75,
-                  child: FittedBox(
-                    child: Text(
-                      '1.2mm',
-                      style: TextStyle(
-                        color: kTextColor,
-                        // fontSize: 18.0,
-                        fontFamily: 'SourceSansPro',
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
+                child: Text(
+                  '1.2mm',
+                  style: TextStyle(
+                    color: kTextColor,
+                    fontSize: textSize,
+                    fontFamily: 'SourceSansPro',
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
               ),
@@ -85,30 +70,21 @@ class _MiscInfoState extends State<MiscInfo> {
             children: <Widget>[
               Expanded(
                 flex: 3,
-                child: FractionallySizedBox(
-                  heightFactor: 0.75,
-                  child: FittedBox(
-                    child: Icon(
-                      Icons.cloud,
-                      color: kIconColor,
-                    ),
-                  ),
+                child: Icon(
+                  Icons.cloud,
+                  color: kIconColor,
+                  size: iconSize,
                 ),
               ),
               Expanded(
                 flex: 2,
-                child: FractionallySizedBox(
-                  heightFactor: 0.75,
-                  child: FittedBox(
-                    child: Text(
-                      '75`',
-                      style: TextStyle(
-                        color: kTextColor,
-                        //fontSize: 18.0,
-                        fontFamily: 'SourceSansPro',
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
+                child: Text(
+                  '75`',
+                  style: TextStyle(
+                    color: kTextColor,
+                    fontSize: textSize,
+                    fontFamily: 'SourceSansPro',
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
               ),

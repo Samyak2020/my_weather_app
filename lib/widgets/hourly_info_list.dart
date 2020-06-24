@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:myweatherapp/models/hourly_list_items.dart';
-import 'package:myweatherapp/utilities/constants.dart';
 
 class HourlyInfoList extends StatefulWidget {
   @override
@@ -19,7 +18,7 @@ class _HourlyInfoListState extends State<HourlyInfoList> {
       itemCount: items.length,
       itemBuilder: (context, index) {
         return Container(
-          margin: EdgeInsets.fromLTRB(14.0, 15.0, 0.0, 14.0),
+          margin: EdgeInsets.fromLTRB(14.0, 12.0, 0.0, 12.0),
           width: MediaQuery.of(context).size.width * 0.16,
           height: MediaQuery.of(context).size.height * 0.25,
           decoration: BoxDecoration(
@@ -35,7 +34,7 @@ class _HourlyInfoListState extends State<HourlyInfoList> {
                   fontSize: MediaQuery.of(context).size.width * 0.1 * 0.45,
                   color: Colors.white70,
                   fontFamily: 'SourceSansPro',
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.w400,
                 ),
               ),
               Icon(
@@ -49,7 +48,7 @@ class _HourlyInfoListState extends State<HourlyInfoList> {
                   fontSize: MediaQuery.of(context).size.width * 0.1 * 0.45,
                   color: Colors.white70,
                   fontFamily: 'SourceSansPro',
-                  fontWeight: FontWeight.w700,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
             ],

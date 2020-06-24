@@ -24,7 +24,7 @@ class _TomorrowScreenState extends State<TomorrowScreen> {
             Icons.arrow_back_ios,
             color: kIconColor,
           ),
-          iconSize: MediaQuery.of(context).size.width * 0.08,
+          iconSize: MediaQuery.of(context).size.width * 0.085,
           onPressed: () {
             Navigator.pop(context);
           },
@@ -32,7 +32,7 @@ class _TomorrowScreenState extends State<TomorrowScreen> {
         title: Text(
           'Weathery',
           style: TextStyle(
-            fontSize: MediaQuery.of(context).size.width * 0.07,
+            fontSize: MediaQuery.of(context).size.width * 0.075,
             color: kTextColor,
             fontFamily: 'PlayfairDisplay',
             fontWeight: FontWeight.w600,
@@ -44,7 +44,7 @@ class _TomorrowScreenState extends State<TomorrowScreen> {
               Icons.search,
               color: kIconColor,
             ),
-            iconSize: MediaQuery.of(context).size.width * 0.08,
+            iconSize: MediaQuery.of(context).size.width * 0.085,
             onPressed: () {},
           ),
         ],
@@ -52,53 +52,51 @@ class _TomorrowScreenState extends State<TomorrowScreen> {
       body: Column(
         children: <Widget>[
           Expanded(
-            flex: 6,
+            flex: 5,
             child: Container(
-              padding: EdgeInsets.only(left: 25.0, top: 10.0, bottom: 10.0),
+              padding: EdgeInsets.only(left: 30.0, top: 5.0, bottom: 10.0),
               alignment: Alignment.bottomLeft,
               //color: Colors.red,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Expanded(
-                    flex: 5,
-                    child: FittedBox(
-                      child: Text(
-                        'Kathmandu',
-                        style: TextStyle(
-                          // backgroundColor: Colors.black,
-                          color: kTextColor,
-                          fontFamily: 'SourceSansPro',
-                          fontWeight: FontWeight.w700,
-                        ),
+                    flex: 9,
+                    child: Text(
+                      'Kathmandu',
+                      style: TextStyle(
+                        // backgroundColor: Colors.black,
+                        color: kTextColor,
+                        fontSize: MediaQuery.of(context).size.width * 0.085,
+                        fontFamily: 'SourceSansPro',
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 9,
+                    child: Text(
+                      'Nepal',
+                      style: TextStyle(
+                        //backgroundColor: Colors.pink,
+                        color: kTextColor,
+                        fontSize: MediaQuery.of(context).size.width * 0.1 * 0.8,
+                        fontFamily: 'SourceSansPro',
+                        fontWeight: FontWeight.w700,
                       ),
                     ),
                   ),
                   Expanded(
                     flex: 4,
-                    child: FittedBox(
-                      child: Text(
-                        'Nepal',
-                        style: TextStyle(
-                          //backgroundColor: Colors.pink,
-                          color: kTextColor,
-                          fontFamily: 'SourceSansPro',
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 2,
-                    child: FittedBox(
-                      child: Text(
-                        'Thursday, 5/27',
-                        style: TextStyle(
-                          //backgroundColor: Colors.indigo,
-                          color: kTextColor,
-                          fontFamily: 'SourceSansPro',
-                          fontWeight: FontWeight.w100,
-                        ),
+                    child: Text(
+                      'Thursday, 5/27',
+                      style: TextStyle(
+                        //backgroundColor: Colors.indigo,
+                        color: kTextColor,
+                        fontSize:
+                            MediaQuery.of(context).size.width * 0.1 * 0.38,
+                        fontFamily: 'SourceSansPro',
+                        fontWeight: FontWeight.w100,
                       ),
                     ),
                   ),
@@ -107,18 +105,34 @@ class _TomorrowScreenState extends State<TomorrowScreen> {
             ),
           ),
           Expanded(
-            flex: 8,
+            flex: 6,
             child: WeatherInfo(),
           ),
           Expanded(
-            flex: 4,
+            flex: 2,
+            child: Container(
+              padding: EdgeInsets.only(left: 25.0, right: 10.0),
+              child: Text(
+                'Discription text goes here',
+                style: TextStyle(
+                  //backgroundColor: Colors.indigo,
+                  color: kTextColor,
+                  fontSize: MediaQuery.of(context).size.width * 0.1 * 0.42,
+                  fontFamily: 'SourceSansPro',
+                  fontWeight: FontWeight.w100,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 3,
             child: MiscInfo(),
           ),
           // Today,Tomorrow -->
           Expanded(
-            flex: 2,
+            flex: 1,
             child: Container(
-              margin: EdgeInsets.only(top: 10.0),
               padding: EdgeInsets.fromLTRB(15.0, 0.0, 75.0, 0.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -129,7 +143,8 @@ class _TomorrowScreenState extends State<TomorrowScreen> {
                       style: TextStyle(
                         // backgroundColor: Colors.black,
                         color: Colors.white70,
-                        fontSize: MediaQuery.of(context).size.width * 0.1 * 0.4,
+                        fontSize:
+                            MediaQuery.of(context).size.width * 0.1 * 0.38,
                         fontFamily: 'SourceSansPro',
                         fontWeight: FontWeight.w600,
                       ),
@@ -187,7 +202,7 @@ class _TomorrowScreenState extends State<TomorrowScreen> {
             ),
           ),
           Expanded(
-            flex: 8,
+            flex: 6,
             child: Padding(
               padding: EdgeInsets.fromLTRB(40.0, 0.0, 0.0, 15.0),
               child: Container(
