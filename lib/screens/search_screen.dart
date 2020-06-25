@@ -7,10 +7,13 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
+  String cityName;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomPadding: false,
         backgroundColor: Color(0x992D3044),
         body: Column(
           children: <Widget>[
@@ -38,6 +41,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     left: Radius.circular(18.0), right: Radius.circular(25.0)),
                 elevation: 0.0,
                 color: Color(0xffC4C4C4),
+                //Color(0xffC4C4C4)
                 child: TextField(
                   style: TextStyle(
                     color: Color(0xff35394F),
@@ -46,6 +50,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   ),
                   cursorColor: Color(0xff35394F),
                   decoration: InputDecoration(
+                    fillColor: Colors.white70,
                     border: InputBorder.none,
                     contentPadding: EdgeInsets.only(left: 25.0, top: 12.0),
                     hintText: 'Search for a city',
@@ -58,13 +63,21 @@ class _SearchScreenState extends State<SearchScreen> {
                       elevation: 5.0,
                       color: Color(0xffC4C4C4),
                       borderRadius: BorderRadius.circular(25.0),
-                      child: Icon(
-                        Icons.search,
-                        size: MediaQuery.of(context).size.width * 0.09,
-                        color: Color(0xff35394F),
+                      child: IconButton(
+                        icon: Icon(
+                          Icons.search,
+                          size: MediaQuery.of(context).size.width * 0.09,
+                          color: Color(0xff35394F),
+                        ),
+                        onPressed: () {
+                          Navigator.pop(context, cityName);
+                        },
                       ),
                     ),
                   ),
+                  onChanged: (value) {
+                    cityName = value;
+                  },
                 ),
               ),
             ),

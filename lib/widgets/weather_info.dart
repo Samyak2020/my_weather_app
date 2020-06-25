@@ -2,6 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:myweatherapp/utilities/constants.dart';
 
 class WeatherInfo extends StatefulWidget {
+  WeatherInfo(
+      {@required this.tempText,
+      @required this.conditionText,
+      @required this.weatherIcon});
+
+  var tempText;
+  final String conditionText;
+  final NetworkImage weatherIcon;
+
   @override
   _WeatherInfoState createState() => _WeatherInfoState();
 }
@@ -24,15 +33,16 @@ class _WeatherInfoState extends State<WeatherInfo> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Expanded(
-                    child: Text(
-                      'Cloudy',
-                      style: TextStyle(
-                        // backgroundColor: Colors.black,
-                        letterSpacing: 1.2,
-                        color: kTextColor,
-                        fontSize: MediaQuery.of(context).size.width * 0.1,
-                        fontFamily: 'PlayfairDisplay',
-                        fontWeight: FontWeight.w600,
+                    child: FittedBox(
+                      child: Text(
+                        widget.conditionText,
+                        style: TextStyle(
+                          // backgroundColor: Colors.black,
+                          color: kTextColor,
+                          fontSize: MediaQuery.of(context).size.width * 0.1,
+                          fontFamily: 'PlayfairDisplay',
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
                   ),
@@ -41,7 +51,7 @@ class _WeatherInfoState extends State<WeatherInfo> {
                       heightFactor: 1.2,
                       child: FittedBox(
                         child: Text(
-                          '12`',
+                          '${widget.tempText}°',
                           style: TextStyle(
                             // backgroundColor: Colors.black,
                             color: kTextColor,
@@ -59,9 +69,12 @@ class _WeatherInfoState extends State<WeatherInfo> {
             ),
           ),
           Expanded(
-            child: Icon(Icons.wb_sunny,
-                color: kIconColor,
-                size: MediaQuery.of(context).size.width * 0.35),
+            child: Image(
+              image: widget.weatherIcon,
+              color: kIconColor,
+              fit: BoxFit.contain,
+              //size: MediaQuery.of(context).size.width * 0.35),
+            ),
           ),
         ],
       ),

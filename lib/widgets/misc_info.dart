@@ -13,7 +13,7 @@ class _MiscInfoState extends State<MiscInfo> {
     var textSize = MediaQuery.of(context).size.width * 0.044;
 
     return Container(
-      margin: EdgeInsets.only(bottom: 15.0, top: 8.0),
+      margin: EdgeInsets.only(bottom: 20.0, top: 5.0),
       //color: Colors.red,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,

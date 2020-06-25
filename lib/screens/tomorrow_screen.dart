@@ -7,6 +7,10 @@ import 'package:myweatherapp/widgets/misc_info.dart';
 import 'package:myweatherapp/widgets/weather_info.dart';
 
 class TomorrowScreen extends StatefulWidget {
+  TomorrowScreen({this.tomorrowWeatherData});
+
+  final tomorrowWeatherData;
+
   @override
   _TomorrowScreenState createState() => _TomorrowScreenState();
 }
@@ -15,6 +19,7 @@ class _TomorrowScreenState extends State<TomorrowScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
         centerTitle: true,
@@ -62,27 +67,31 @@ class _TomorrowScreenState extends State<TomorrowScreen> {
                 children: <Widget>[
                   Expanded(
                     flex: 9,
-                    child: Text(
-                      'Kathmandu',
-                      style: TextStyle(
-                        // backgroundColor: Colors.black,
-                        color: kTextColor,
-                        fontSize: MediaQuery.of(context).size.width * 0.085,
-                        fontFamily: 'SourceSansPro',
-                        fontWeight: FontWeight.w700,
+                    child: FittedBox(
+                      child: Text(
+                        'Kathmandu',
+                        style: TextStyle(
+                          // backgroundColor: Colors.black,
+                          color: kTextColor,
+                          fontSize: MediaQuery.of(context).size.width * 0.085,
+                          fontFamily: 'SourceSansPro',
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
                     ),
                   ),
                   Expanded(
                     flex: 9,
-                    child: Text(
-                      'Nepal',
-                      style: TextStyle(
-                        //backgroundColor: Colors.pink,
-                        color: kTextColor,
-                        fontSize: MediaQuery.of(context).size.width * 0.1 * 0.8,
-                        fontFamily: 'SourceSansPro',
-                        fontWeight: FontWeight.w700,
+                    child: FittedBox(
+                      child: Text(
+                        'Nepal',
+                        style: TextStyle(
+                          //backgroundColor: Colors.pink,
+                          color: kTextColor,
+                          fontSize: MediaQuery.of(context).size.width * 0.1 * 0.8,
+                          fontFamily: 'SourceSansPro',
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
                     ),
                   ),
@@ -94,7 +103,7 @@ class _TomorrowScreenState extends State<TomorrowScreen> {
                         //backgroundColor: Colors.indigo,
                         color: kTextColor,
                         fontSize:
-                            MediaQuery.of(context).size.width * 0.1 * 0.38,
+                            MediaQuery.of(context).size.width * 0.1 * 0.4,
                         fontFamily: 'SourceSansPro',
                         fontWeight: FontWeight.w100,
                       ),

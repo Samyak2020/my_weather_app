@@ -2,49 +2,70 @@ import 'package:flutter/material.dart';
 import 'package:myweatherapp/screens/search_screen.dart';
 import 'package:myweatherapp/screens/this_week.dart';
 import 'package:myweatherapp/screens/tomorrow_screen.dart';
-import 'package:myweatherapp/services/location.dart';
-import 'package:myweatherapp/services/networking.dart';
+import 'package:myweatherapp/services/weather.dart';
 import 'package:myweatherapp/utilities/constants.dart';
 import 'package:myweatherapp/widgets/hourly_info_list.dart';
 import 'package:myweatherapp/widgets/misc_info.dart';
 import 'package:myweatherapp/widgets/weather_info.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:myweatherapp/services/location.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 class TodayHomeScreen extends StatefulWidget {
+  TodayHomeScreen({this.locationWeatherData});
+  final locationWeatherData;
+
   @override
   _TodayHomeScreenState createState() => _TodayHomeScreenState();
 }
 
 class _TodayHomeScreenState extends State<TodayHomeScreen> {
-  var latitude;
-  var longitude;
+  WeatherModel weatherModel = WeatherModel();
+  var todayTemperature;
+  String todayCondition;
+  String iconUrl;
+  String cityName;
+  String countryName;
+  String description;
+  //icon_url =
 
-  void getLocationData() async {
-    LocationTask locationTask = LocationTask();
+  void updateUI({dynamic weatherData}) {
+    setState(() {
+      if (weatherData == null) {
+        todayTemperature = 0;
+        todayCondition = "Error";
+        description = "Unable to get weather data";
+        cityName = '';
+        countryName = '';
+        return;
+      }
+      var temp = weatherData['main']['temp'];
+      todayTemperature = temp.toInt();
+      todayCondition = weatherData['weather'][0]['main'];
+      iconUrl = "http://openweathermap.org/img/wn/" +
+          weatherData["weather"][0]["icon"] +
+          "@2x.png";
+      // http://openweathermap.org/img/wn/10d@2x.png
+      //weatherData['weather'][0]['icon'];
+      // http://openweathermap.org/img/wn/{Weather?[0]?.Icon}@2x.png
 
-    await locationTask.getCurrentLocation();
-    this.latitude = locationTask.latitude;
-    this.longitude = locationTask.longitude;
+      cityName = weatherData['name'];
+      countryName = weatherData['sys']['country'];
+      description = weatherData['weather'][0]['description'];
 
-    NetworkHelper networkHelper = NetworkHelper(
-        'https://api.openweathermap.org/data/2.5/weather?lat=$latitude&lon=$longitude&appid=$apiKey');
-
-    var weatherData = await networkHelper.getData();
+      //print(todayTemperature);
+    });
   }
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    getLocationData();
+    updateUI(weatherData: widget.locationWeatherData);
+    //print(widget.locationWeatherData);
+    // 'widget' gives access to parent stateful widget
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
         centerTitle: true,
@@ -55,8 +76,9 @@ class _TodayHomeScreenState extends State<TodayHomeScreen> {
             color: kIconColor,
           ),
           iconSize: MediaQuery.of(context).size.width * 0.085,
-          onPressed: () {
-            print("Hello");
+          onPressed: () async {
+            var weatherData = await weatherModel.getLocationWeather();
+            updateUI(weatherData: weatherData);
           },
         ),
         title: Text(
@@ -75,15 +97,18 @@ class _TodayHomeScreenState extends State<TodayHomeScreen> {
               color: kIconColor,
             ),
             iconSize: MediaQuery.of(context).size.width * 0.085,
-            onPressed: () {
-              setState(() {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => SearchScreen(),
-                  ),
-                );
-              });
+            onPressed: () async {
+              var typedName = await Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SearchScreen(),
+                ),
+              );
+              if (typedName != null) {
+                var weatherDataForSearchedCity =
+                    await weatherModel.getSearchedCityWeather(typedName);
+                updateUI(weatherData: weatherDataForSearchedCity);
+              }
             },
           ),
         ],
@@ -101,27 +126,32 @@ class _TodayHomeScreenState extends State<TodayHomeScreen> {
                 children: <Widget>[
                   Expanded(
                     flex: 9,
-                    child: Text(
-                      'Kathmandu',
-                      style: TextStyle(
-                        // backgroundColor: Colors.black,
-                        color: kTextColor,
-                        fontSize: MediaQuery.of(context).size.width * 0.085,
-                        fontFamily: 'SourceSansPro',
-                        fontWeight: FontWeight.w700,
+                    child: FittedBox(
+                      child: Text(
+                        cityName,
+                        style: TextStyle(
+                          // backgroundColor: Colors.black,
+                          color: kTextColor,
+                          fontSize: MediaQuery.of(context).size.width * 0.075,
+                          fontFamily: 'SourceSansPro',
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
                     ),
                   ),
                   Expanded(
                     flex: 9,
-                    child: Text(
-                      'Nepal',
-                      style: TextStyle(
-                        //backgroundColor: Colors.pink,
-                        color: kTextColor,
-                        fontSize: MediaQuery.of(context).size.width * 0.1 * 0.8,
-                        fontFamily: 'SourceSansPro',
-                        fontWeight: FontWeight.w700,
+                    child: FittedBox(
+                      child: Text(
+                        countryName,
+                        style: TextStyle(
+                          //backgroundColor: Colors.pink,
+                          color: kTextColor,
+                          fontSize:
+                              MediaQuery.of(context).size.width * 0.1 * 0.75,
+                          fontFamily: 'SourceSansPro',
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
                     ),
                   ),
@@ -132,8 +162,7 @@ class _TodayHomeScreenState extends State<TodayHomeScreen> {
                       style: TextStyle(
                         //backgroundColor: Colors.indigo,
                         color: kTextColor,
-                        fontSize:
-                            MediaQuery.of(context).size.width * 0.1 * 0.38,
+                        fontSize: MediaQuery.of(context).size.width * 0.1 * 0.4,
                         fontFamily: 'SourceSansPro',
                         fontWeight: FontWeight.w100,
                       ),
@@ -145,18 +174,21 @@ class _TodayHomeScreenState extends State<TodayHomeScreen> {
           ),
           Expanded(
             flex: 6,
-            child: WeatherInfo(),
+            child: WeatherInfo(
+                tempText: todayTemperature,
+                conditionText: todayCondition,
+                weatherIcon: NetworkImage(iconUrl)),
           ),
           Expanded(
             flex: 2,
             child: Container(
               padding: EdgeInsets.only(left: 15.0, right: 15.0),
               child: Text(
-                '" asdfsetyshgduf ahaisf h;ajlsfhli ajslkfas ;fasflj ka;sn faslbfjasvfiauofb. "',
+                ' ${description[0].toUpperCase()}${description.substring(1).toLowerCase()} ',
                 style: TextStyle(
                   //backgroundColor: Colors.indigo,
                   color: kTextColor,
-                  fontSize: MediaQuery.of(context).size.width * 0.1 * 0.42,
+                  fontSize: MediaQuery.of(context).size.width * 0.1 * 0.5,
                   fontFamily: 'SourceSansPro',
                   fontWeight: FontWeight.w100,
                 ),
@@ -205,7 +237,8 @@ class _TodayHomeScreenState extends State<TodayHomeScreen> {
                         Navigator.push(
                           context,
                           new MaterialPageRoute(
-                              builder: (context) => TomorrowScreen()),
+                            builder: (context) => TomorrowScreen(),
+                          ),
                         );
                       });
                     },
@@ -267,7 +300,3 @@ class _TodayHomeScreenState extends State<TodayHomeScreen> {
     );
   }
 }
-
-//var temp = decodedData['main']['temp'];
-//    var condition = decodedData['weather'][0]['id'];
-//    var cityName = decodedData['name'];

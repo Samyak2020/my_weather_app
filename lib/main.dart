@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'screens/home_screen.dart';
+import 'package:myweatherapp/screens/loading_screen.dart';
 import 'package:flutter/services.dart';
 
 void main() => runApp(MyApp());
@@ -27,7 +27,7 @@ class _MyAppState extends State<MyApp> {
           ),
         ),
       ),
-      home: TodayHomeScreen(),
+      home: LoadingScreen(),
     );
   }
 }

@@ -4,10 +4,15 @@ import 'package:myweatherapp/utilities/constants.dart';
 import 'package:myweatherapp/models/weekly_list_items.dart';
 
 class ThisWeek extends StatelessWidget {
+  ThisWeek({this.thisWeekWeatherData});
+
+  final thisWeekWeatherData;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+        resizeToAvoidBottomPadding: false,
         backgroundColor: Color(0xff2D3044),
         appBar: AppBar(
           backgroundColor: Color(0xff2D3044),
