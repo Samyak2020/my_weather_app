@@ -220,11 +220,10 @@ class _TodayHomeScreenState extends State<TodayHomeScreen> {
             Expanded(
               flex: 1,
               child: Container(
-                padding: EdgeInsets.fromLTRB(15.0, 0.0, 75.0, 3.0),
+                padding: EdgeInsets.fromLTRB(35.0, 0.0, 75.0, 3.0),
                 //margin: EdgeInsets.only(top: 30.0),
                 // color: Colors.green,
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
                     Text(
                       'Today',
@@ -237,29 +236,30 @@ class _TodayHomeScreenState extends State<TodayHomeScreen> {
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                    GestureDetector(
-                      child: Text(
-                        'Tomorrow',
-                        style: TextStyle(
-                          // backgroundColor: Colors.black,
-                          color: Colors.white70,
-                          fontSize:
-                              MediaQuery.of(context).size.width * 0.1 * 0.38,
-                          fontFamily: 'SourceSansPro',
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      onTap: () {
-                        setState(() {
-                          Navigator.push(
-                            context,
-                            new MaterialPageRoute(
-                              builder: (context) => TomorrowScreen(),
-                            ),
-                          );
-                        });
-                      },
-                    ),
+                    SizedBox(width: MediaQuery.of(context).size.width * 0.07),
+                    //GestureDetector(
+                    //  child: Text(
+                    //    'Tomorrow',
+                    //    style: TextStyle(
+                    //      // backgroundColor: Colors.black,
+                    //      color: Colors.white70,
+                    //      fontSize:
+                    //          MediaQuery.of(context).size.width * 0.1 * 0.38,
+                    //      fontFamily: 'SourceSansPro',
+                    //      fontWeight: FontWeight.w600,
+                    //    ),
+                    //  ),
+                    //  onTap: () {
+                    //    setState(() {
+                    //      Navigator.push(
+                    //        context,
+                    //        new MaterialPageRoute(
+                    //          builder: (context) => TomorrowScreen(),
+                    //        ),
+                    //      );
+                    //    });
+                    //  },
+                    //),
                     GestureDetector(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.start,

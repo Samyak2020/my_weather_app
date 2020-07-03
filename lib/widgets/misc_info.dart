@@ -115,7 +115,7 @@ class _MiscInfoState extends State<MiscInfo> {
               Expanded(
                 flex: 2,
                 child: Text(
-                  widget.clouds.toString(),
+                  '${widget.clouds.toString()} %',
                   style: TextStyle(
                     color: kTextColor,
                     fontSize: textSize,
