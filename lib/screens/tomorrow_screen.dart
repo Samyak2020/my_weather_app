@@ -88,7 +88,8 @@ class _TomorrowScreenState extends State<TomorrowScreen> {
                         style: TextStyle(
                           //backgroundColor: Colors.pink,
                           color: kTextColor,
-                          fontSize: MediaQuery.of(context).size.width * 0.1 * 0.8,
+                          fontSize:
+                              MediaQuery.of(context).size.width * 0.1 * 0.8,
                           fontFamily: 'SourceSansPro',
                           fontWeight: FontWeight.w700,
                         ),
@@ -102,8 +103,7 @@ class _TomorrowScreenState extends State<TomorrowScreen> {
                       style: TextStyle(
                         //backgroundColor: Colors.indigo,
                         color: kTextColor,
-                        fontSize:
-                            MediaQuery.of(context).size.width * 0.1 * 0.4,
+                        fontSize: MediaQuery.of(context).size.width * 0.1 * 0.4,
                         fontFamily: 'SourceSansPro',
                         fontWeight: FontWeight.w100,
                       ),

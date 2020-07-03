@@ -1,6 +1,7 @@
 import 'package:myweatherapp/services/location.dart';
 import 'package:myweatherapp/services/networking.dart';
 import 'package:myweatherapp/utilities/constants.dart';
+import 'package:intl/intl.dart';
 
 class WeatherModel {
   Future<dynamic> getLocationWeather() async {

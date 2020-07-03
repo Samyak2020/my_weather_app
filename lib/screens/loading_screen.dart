@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:myweatherapp/services/location.dart';
-import 'package:myweatherapp/services/networking.dart';
 import 'package:myweatherapp/utilities/constants.dart';
 import 'package:myweatherapp/services/weather.dart';
 import 'home_screen.dart';

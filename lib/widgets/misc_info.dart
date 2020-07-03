@@ -1,7 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:myweatherapp/utilities/constants.dart';
+import 'package:weather_icons/weather_icons.dart';
 
 class MiscInfo extends StatefulWidget {
+  MiscInfo(
+      {@required this.windSpeed,
+      @required this.humidity,
+      @required this.clouds});
+
+  var windSpeed;
+  final int humidity;
+  final int clouds;
+
   @override
   _MiscInfoState createState() => _MiscInfoState();
 }
@@ -13,7 +23,9 @@ class _MiscInfoState extends State<MiscInfo> {
     var textSize = MediaQuery.of(context).size.width * 0.044;
 
     return Container(
-      margin: EdgeInsets.only(bottom: 20.0, top: 5.0),
+      margin: EdgeInsets.only(
+        bottom: 20.0,
+      ),
       //color: Colors.red,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -22,8 +34,8 @@ class _MiscInfoState extends State<MiscInfo> {
             children: <Widget>[
               Expanded(
                 flex: 3,
-                child: Icon(
-                  Icons.all_inclusive,
+                child: WindIcon(
+                  degree: 0.0,
                   color: kIconColor,
                   size: iconSize,
                 ),
@@ -31,10 +43,22 @@ class _MiscInfoState extends State<MiscInfo> {
               Expanded(
                 flex: 2,
                 child: Text(
-                  '0.8kmph',
+                  '${widget.windSpeed.toString()} m/s',
                   style: TextStyle(
                     color: kTextColor,
                     fontSize: textSize,
+                    fontFamily: 'SourceSansPro',
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Text(
+                  'Wind Speed',
+                  style: TextStyle(
+                    // backgroundColor: Colors.black,
+                    color: Colors.white70,
+                    fontSize: MediaQuery.of(context).size.width * 0.1 * 0.32,
                     fontFamily: 'SourceSansPro',
                     fontWeight: FontWeight.w600,
                   ),
@@ -47,7 +71,7 @@ class _MiscInfoState extends State<MiscInfo> {
               Expanded(
                 flex: 3,
                 child: Icon(
-                  Icons.grain,
+                  Icons.blur_on,
                   color: kIconColor,
                   size: iconSize,
                 ),
@@ -55,10 +79,22 @@ class _MiscInfoState extends State<MiscInfo> {
               Expanded(
                 flex: 2,
                 child: Text(
-                  '1.2mm',
+                  '${widget.humidity.toString()} %',
                   style: TextStyle(
                     color: kTextColor,
                     fontSize: textSize,
+                    fontFamily: 'SourceSansPro',
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Text(
+                  'Humidity',
+                  style: TextStyle(
+                    // backgroundColor: Colors.black,
+                    color: Colors.white70,
+                    fontSize: MediaQuery.of(context).size.width * 0.1 * 0.32,
                     fontFamily: 'SourceSansPro',
                     fontWeight: FontWeight.w600,
                   ),
@@ -79,10 +115,22 @@ class _MiscInfoState extends State<MiscInfo> {
               Expanded(
                 flex: 2,
                 child: Text(
-                  '75`',
+                  widget.clouds.toString(),
                   style: TextStyle(
                     color: kTextColor,
                     fontSize: textSize,
+                    fontFamily: 'SourceSansPro',
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+              Expanded(
+                child: Text(
+                  'Clouds',
+                  style: TextStyle(
+                    // backgroundColor: Colors.black,
+                    color: Colors.white70,
+                    fontSize: MediaQuery.of(context).size.width * 0.1 * 0.32,
                     fontFamily: 'SourceSansPro',
                     fontWeight: FontWeight.w600,
                   ),
