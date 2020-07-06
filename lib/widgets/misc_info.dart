@@ -33,7 +33,7 @@ class _MiscInfoState extends State<MiscInfo> {
           Column(
             children: <Widget>[
               Expanded(
-                flex: 3,
+                flex: 5,
                 child: WindIcon(
                   degree: 0.0,
                   color: kIconColor,
@@ -41,7 +41,7 @@ class _MiscInfoState extends State<MiscInfo> {
                 ),
               ),
               Expanded(
-                flex: 2,
+                flex: 3,
                 child: Text(
                   '${widget.windSpeed.toString()} m/s',
                   style: TextStyle(
@@ -53,12 +53,13 @@ class _MiscInfoState extends State<MiscInfo> {
                 ),
               ),
               Expanded(
+                flex: 3,
                 child: Text(
                   'Wind Speed',
                   style: TextStyle(
                     // backgroundColor: Colors.black,
                     color: Colors.white70,
-                    fontSize: MediaQuery.of(context).size.width * 0.1 * 0.32,
+                    fontSize: MediaQuery.of(context).size.width * 0.1 * 0.35,
                     fontFamily: 'SourceSansPro',
                     fontWeight: FontWeight.w600,
                   ),
@@ -69,7 +70,7 @@ class _MiscInfoState extends State<MiscInfo> {
           Column(
             children: <Widget>[
               Expanded(
-                flex: 3,
+                flex: 5,
                 child: Icon(
                   Icons.blur_on,
                   color: kIconColor,
@@ -77,7 +78,7 @@ class _MiscInfoState extends State<MiscInfo> {
                 ),
               ),
               Expanded(
-                flex: 2,
+                flex: 3,
                 child: Text(
                   '${widget.humidity.toString()} %',
                   style: TextStyle(
@@ -89,12 +90,13 @@ class _MiscInfoState extends State<MiscInfo> {
                 ),
               ),
               Expanded(
+                flex: 3,
                 child: Text(
                   'Humidity',
                   style: TextStyle(
                     // backgroundColor: Colors.black,
                     color: Colors.white70,
-                    fontSize: MediaQuery.of(context).size.width * 0.1 * 0.32,
+                    fontSize: MediaQuery.of(context).size.width * 0.1 * 0.35,
                     fontFamily: 'SourceSansPro',
                     fontWeight: FontWeight.w600,
                   ),
@@ -105,7 +107,7 @@ class _MiscInfoState extends State<MiscInfo> {
           Column(
             children: <Widget>[
               Expanded(
-                flex: 3,
+                flex: 5,
                 child: Icon(
                   Icons.cloud,
                   color: kIconColor,
@@ -113,7 +115,7 @@ class _MiscInfoState extends State<MiscInfo> {
                 ),
               ),
               Expanded(
-                flex: 2,
+                flex: 3,
                 child: Text(
                   '${widget.clouds.toString()} %',
                   style: TextStyle(
@@ -125,12 +127,13 @@ class _MiscInfoState extends State<MiscInfo> {
                 ),
               ),
               Expanded(
+                flex: 3,
                 child: Text(
                   'Clouds',
                   style: TextStyle(
                     // backgroundColor: Colors.black,
                     color: Colors.white70,
-                    fontSize: MediaQuery.of(context).size.width * 0.1 * 0.32,
+                    fontSize: MediaQuery.of(context).size.width * 0.1 * 0.35,
                     fontFamily: 'SourceSansPro',
                     fontWeight: FontWeight.w600,
                   ),

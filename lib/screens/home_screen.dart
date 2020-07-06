@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:myweatherapp/screens/search_screen.dart';
 import 'package:myweatherapp/screens/this_week.dart';
-import 'package:myweatherapp/screens/tomorrow_screen.dart';
 import 'package:myweatherapp/services/weather.dart';
 import 'package:myweatherapp/utilities/constants.dart';
 import 'package:myweatherapp/widgets/hourly_info_list.dart';
@@ -10,8 +9,10 @@ import 'package:myweatherapp/widgets/misc_info.dart';
 import 'package:myweatherapp/widgets/weather_info.dart';
 
 class TodayHomeScreen extends StatefulWidget {
-  TodayHomeScreen({this.locationWeatherData});
-  final locationWeatherData; // make weatherData in updateUI.
+  TodayHomeScreen({this.locationWeatherData, this.hourlyData, this.weeklyData});
+  final locationWeatherData,
+      hourlyData,
+      weeklyData; // make weatherData in updateUI.
 
   @override
   _TodayHomeScreenState createState() => _TodayHomeScreenState();
@@ -68,7 +69,7 @@ class _TodayHomeScreenState extends State<TodayHomeScreen> {
   void initState() {
     super.initState();
     updateUI(weatherData: widget.locationWeatherData);
-    // print(widget.locationWeatherData);
+    //print('Location DATA AT LOADING SCREEN:${widget.locationWeatherData}');
     // 'widget' gives access to parent stateful widget
   }
 
@@ -226,7 +227,7 @@ class _TodayHomeScreenState extends State<TodayHomeScreen> {
                 child: Row(
                   children: <Widget>[
                     Text(
-                      'Today',
+                      'Next 48 hours',
                       style: TextStyle(
                         // backgroundColor: Colors.black,
                         color: kTextColor,
@@ -292,7 +293,9 @@ class _TodayHomeScreenState extends State<TodayHomeScreen> {
                           Navigator.push(
                             context,
                             new MaterialPageRoute(
-                                builder: (context) => ThisWeek()),
+                                builder: (context) => ThisWeek(
+                                      thisWeekWeatherData: widget.weeklyData,
+                                    )),
                           );
                         });
                       },
@@ -306,12 +309,15 @@ class _TodayHomeScreenState extends State<TodayHomeScreen> {
               child: Padding(
                 padding: EdgeInsets.fromLTRB(40.0, 0.0, 0.0, 15.0),
                 child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.horizontal(
-                          left: Radius.circular(25.0), right: Radius.zero),
-                      color: Color(0xffC4C4C4),
-                    ),
-                    child: HourlyInfoList()),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.horizontal(
+                        left: Radius.circular(25.0), right: Radius.zero),
+                    color: Color(0xffC4C4C4),
+                  ),
+                  child: HourlyInfoList(
+                    jsonHourlyData: widget.hourlyData,
+                  ),
+                ),
               ),
             ),
           ],

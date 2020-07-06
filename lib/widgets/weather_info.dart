@@ -19,7 +19,7 @@ class _WeatherInfoState extends State<WeatherInfo> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: 25.0, left: 10.0),
+      margin: EdgeInsets.only(bottom: 15.0, left: 10.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[

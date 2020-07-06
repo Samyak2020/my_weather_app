@@ -16,11 +16,20 @@ class _LoadingScreenState extends State<LoadingScreen> {
   void getLocationData() async {
     WeatherModel weatherModel = WeatherModel();
     var weatherData = await weatherModel.getLocationWeather();
+    var hourlyData = await weatherModel.getHourlyData();
+
+    //HourlyInfoList(hourlyData: hourlyData);
     //print(weatherData);
     //this.weatherData = weatherData;
     Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return TodayHomeScreen(locationWeatherData: weatherData);
+      return TodayHomeScreen(
+        locationWeatherData: weatherData,
+        hourlyData: hourlyData,
+        weeklyData: hourlyData,
+      );
     }));
+
+    // print('HOURLY DATA AT LOADING SCREEN: $hourlyData');
     // TomorrowScreen(tomorrowWeatherData: weatherData);
     // ThisWeek(thisWeekWeatherData: weatherData);
   }
