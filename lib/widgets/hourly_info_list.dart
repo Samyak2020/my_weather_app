@@ -48,7 +48,8 @@ class _HourlyInfoListState extends State<HourlyInfoList> {
   void initState() {
     super.initState();
     // updateHourlyDataList(hourlyWeatherData: widget.jsonHourlyData);
-    //print('HOURLY DATA IS: ${widget.jsonHourlyData}');
+    //
+    // print('HOURLY DATA IS: ${widget.jsonHourlyData}');
     // print('temperature at 12am is: $todayTempText');
     getHourlyData();
   }
@@ -70,7 +71,7 @@ class _HourlyInfoListState extends State<HourlyInfoList> {
         return Container(
           margin: EdgeInsets.fromLTRB(14.0, 12.0, 0.0, 12.0),
           width: MediaQuery.of(context).size.width * 0.16,
-          height: MediaQuery.of(context).size.height * 0.25,
+          height: MediaQuery.of(context).size.height * 0.35,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(50.0),
             color: Color(0xff434761),
@@ -79,10 +80,10 @@ class _HourlyInfoListState extends State<HourlyInfoList> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               Expanded(
-                flex: 2,
+                flex: 3,
                 child: Padding(
                   padding: EdgeInsets.only(
-                      top: MediaQuery.of(context).size.width * 0.1 * 0.35),
+                      top: MediaQuery.of(context).size.width * 0.1 * 0.30),
                   child: Text(
                     //timeNow.toString(),
                     timeNow.toString(),
@@ -99,18 +100,18 @@ class _HourlyInfoListState extends State<HourlyInfoList> {
                 ),
               ),
               Expanded(
-                flex: 4,
+                flex: 5,
                 child: Image(
                   image: NetworkImage("http://openweathermap.org/img/wn/" +
                       hourlyData[index]['weather'][0]['icon'] +
                       "@2x.png"),
                   color: Color(0xffEDE6CB),
-                  fit: BoxFit.fill,
+                  fit: BoxFit.contain,
                   //size: MediaQuery.of(context).size.height * 0.1 * 0.5,
                 ),
               ),
               Expanded(
-                flex: 2,
+                flex: 3,
                 child: Text(
                   '${hourlyData[index]['temp'].toInt()}°',
                   style: TextStyle(
